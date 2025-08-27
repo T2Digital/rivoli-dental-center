@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز ريفولي لطب الأسنان</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://unpkg.com/sweetalert2@11"></script>
+  <script src="https://unpkg.com/mapbox-gl@2.8.2/dist/mapbox-gl.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/mapbox-gl@2.8.2/dist/mapbox-gl.css">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Error:', err));
+    }
+  </script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <img src="public/logo.png" alt="شعار ريفولي" class="logo">
+        <ul class="nav-menu">
+          <li><a href="#">الرئيسية</a></li>
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#gallery">معرض الصور</a></li>
+          <li><a href="#booking">الحجز</a></li>
+          <li><a href="#about">من نحن</a></li>
+          <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+        <button id="theme-toggle"><i class="fas fa-moon"></i></button>
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" data-aos="fade-up">
+    <video autoplay muted loop class="hero-video">
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+      <h1>ابتسامتك المثالية تبدأ مع ريفولي!</h1>
+      <p>خدمات طب أسنان متميزة في قلب القاهرة، أعلى سينما ريفولي</p>
+      <a href="#booking" class="neon-button">احجز موعدك الآن</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 data-aos="fade-up">خدماتنا</h2>
+      <div class="services-grid" id="services-container"></div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <h2 data-aos="fade-up">معرض الصور</h2>
+      <div class="gallery-slider swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="https://via.placeholder.com/600x400?text=صورة+1" alt="صورة 1"></div>
+          <div class="swiper-slide"><img src="https://via.placeholder.com/600x400?text=صورة+2" alt="صورة 2"></div>
+          <div class="swiper-slide"><img src="https://via.placeholder.com/600x400?text=صورة+3" alt="صورة 3"></div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section id="booking" class="section">
+    <div class="container">
+      <h2 data-aos="fade-up">احجز موعدك</h2>
+      <form id="booking-form">
+        <label for="patient-name">الاسم:</label>
+        <input type="text" id="patient-name" required>
+        <label for="patient-phone">رقم الهاتف:</label>
+        <input type="tel" id="patient-phone" required>
+        <label for="service-select">الخدمة:</label>
+        <select id="service-select" required>
+          <option value="">اختر الخدمة</option>
+        </select>
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>الساعة</th>
+              <th>الأحد</th><th>الإثنين</th><th>الثلاثاء</th><th>الأربعاء</th><th>الخميس</th><th>الجمعة</th><th>السبت</th>
+            </tr>
+          </thead>
+          <tbody id="schedule-body"></tbody>
+        </table>
+        <button type="button" id="confirm-booking" class="neon-button" disabled>تأكيد الحجز</button>
+        <button type="button" id="clear-selection" class="neon-button">إلغاء الاختيار</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 data-aos="fade-up">من نحن</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>مركز ريفولي لطب الأسنان هو وجهتكم للحصول على ابتسامة مثالية. نقدم خدمات طب أسنان متقدمة باستخدام أحدث التقنيات في قلب القاهرة. فريقنا من الأطباء المحترفين يضمن تجربة مريحة ونتائج رائعة.</p>
+          <p>العنوان: 27 شارع 26 يوليو - أعلى سينما ريفولي - أمام دار القضاء العالي - وسط البلد - القاهرة</p>
+        </div>
+        <img src="https://via.placeholder.com/450x300?text=About+Image" alt="صورة عن المركز" class="about-image" data-aos="zoom-in">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 data-aos="fade-up">اتصل بنا</h2>
+      <div class="contact-info">
+        <p>العنوان: 27 شارع 26 يوليو - أعلى سينما ريفولي - أمام دار القضاء العالي - وسط البلد - القاهرة</p>
+        <p>أرقام الهاتف: <a href="tel:+201234567890">+201234567890</a>, <a href="tel:+201098765432">+201098765432</a></p>
+        <p>البريد الإلكتروني: <a href="mailto:info@revoli-dental.com">info@revoli-dental.com</a></p>
+      </div>
+      <div class="map-container" id="map"></div>
+      <div class="map-controls">
+        <button id="toggle-rotation" class="neon-button map-control">إيقاف الدوران</button>
+        <button id="go-to-center" class="neon-button map-control">الذهاب إلى المركز</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section (إبداع إضافي) -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <h2 data-aos="fade-up">آراء العملاء</h2>
+      <div class="gallery-slider swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><p>"خدمة ممتازة! ابتسامتي أصبحت رائعة." - أحمد</p></div>
+          <div class="swiper-slide"><p>"فريق محترف ومريح." - سارة</p></div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  |</section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>حقوق الطبع والنشر © 2025 مركز ريفولي لطب الأسنان. جميع الحقوق محفوظة.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" class="neon-button">عودة إلى الأعلى</button>
+
+  <!-- Chatbot (إبداع إضافي) -->
+  <div class="chatbot" id="chatbot-toggle">💬</div>
+  <div class="chatbot-window" id="chatbot-window">
+    <input type="text" id="chatbot-input" placeholder="اكتب سؤالك...">
+    <button id="chatbot-send">إرسال</button>
+    <div id="chatbot-response"></div>
+  </div>
+</body>
+</html>
