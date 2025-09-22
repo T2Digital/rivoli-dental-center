@@ -860,45 +860,6 @@ document.documentElement.lang = navigator.language || 'ar';
 
 /* ========== Online Consultation Modal & Image Upload ========== */
 // imgbbKey: ضع مفتاح imgbb الخاص بك هنا
-
-// فتح وغلق نافذة الاستشارة
-const modal = document.getElementById('consultation-modal');
-const onlineBtn = document.getElementById('online-consultation-btn');
-const closeBtn = modal.querySelector('.close');
-const cancelBtn = modal.querySelector('#cancel-consultation');
-onlineBtn.onclick = () => modal.classList.add('active');
-closeBtn.onclick = cancelBtn.onclick = () => resetConsultModal();
-window.onclick = e => { if(e.target === modal) resetConsultModal(); };
-function resetConsultModal() {
-  modal.classList.remove('active');
-  document.getElementById('consultation-form').reset();
-  document.getElementById('uploaded-images').innerHTML = '';
-  uploadedFiles = [];
-}
-
-// رفع الصور إلى imgbb
-let uploadedFiles = [];
-const uploadArea = modal.querySelector('.file-upload-area');
-const imgInput = document.getElementById('consult-images');
-uploadArea.onclick = () => imgInput.click();
-imgInput.onchange = function() { handleFileInput(this.files); }
-uploadArea.ondragover = e => { e.preventDefault(); uploadArea.style.background="#e6f9ff";}
-uploadArea.ondragleave = e => { e.preventDefault(); uploadArea.style.background="";}
-uploadArea.ondrop = function(e) {
-  e.preventDefault();
-  handleFileInput(e.dataTransfer.files);
-  uploadArea.style.background="";
-};
-function handleFileInput(files){
-  let list = Array.from(files).slice(0,5-uploadedFiles.length); // max 5
-  if(list.length === 0) return;
-  list.forEach(file => {
-    if(!file.type.startsWith('image/')) return;
-    let reader = new FileReader();
-    reader.onload = function(ev) {
-      let img = document.createElement('img');
-      img.src = ev.target.r/* ========== Online Consultation Modal & Image Upload ========== */
-// imgbbKey: ضع مفتاح imgbb الخاص بك هنا
 const imgbbKey = "bde613bd4475de5e00274a795091ba04"; // ✨ استبدلها بمفتاحك الصحيح
 
 // فتح وغلق نافذة الاستشارة
@@ -1015,3 +976,4 @@ document.onkeydown = e => { if(!lightbox.classList.contains('active')) return;
 };
 
 /* أي أكواد تخص interaction أو تحسينات تحتفظ بكامل الخصائص دون حذف وظائف قائمة */
+
