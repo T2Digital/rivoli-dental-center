@@ -940,7 +940,7 @@ form.onsubmit = async function(e){
   }
   // تكويد نص الرسالة للواتساب
   let waMsg = encodeURIComponent(msg);
-  let waHref = `https://wa.me/201030956097?text=${waMsg}`;
+  let waHref = `https://wa.me/201027099901?text=${waMsg}`;
   window.open(waHref, '_blank');
   resetConsultModal();
 }
@@ -976,4 +976,5 @@ document.onkeydown = e => { if(!lightbox.classList.contains('active')) return;
 };
 
 /* أي أكواد تخص interaction أو تحسينات تحتفظ بكامل الخصائص دون حذف وظائف قائمة */
+
 
